@@ -23,6 +23,6 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: '3.13'
-        run: pip install requests
+      - run: pip install requests
       - name: Extract User Announcement Changes
         run: python .github/extract-user-announcement-changes.py ${{ steps.release.outputs.upload_url }} ${{ github.token }} ${{ github.event.release.tag_name }}
