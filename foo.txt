@@ -5,3 +5,5 @@ Something important added that users would want to know about.
 Another important thing that user's would want to know about.
 
 Some info that a user wouldn't be interested in knowing.
+
+A bit of info useful for users to know about.
