@@ -3,3 +3,6 @@ changelog:
     - title: Notable Changes for Users
       labels:
         - user-change
+    - title: Changes
+      labels:
+        - "*"
