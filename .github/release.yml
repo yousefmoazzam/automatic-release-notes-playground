@@ -1,0 +1,5 @@
+changelog:
+  categories:
+    - title: Notable Changes for Users
+      labels:
+        - user-change
