@@ -8,7 +8,8 @@ USER_ANNOUNCEMENT_HEADER = "Notable Changes for Users"
 
 
 def main(release_body: str, upload_url: str, auth_token: str):
-    print(release_body)
+    print(f"release_body: {release_body}")
+    print(f"upload_url: {upload_url}")
     data = extract_user_announcements(release_body)
     print(data)
 
