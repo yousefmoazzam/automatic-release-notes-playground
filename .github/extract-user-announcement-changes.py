@@ -8,7 +8,9 @@ USER_ANNOUNCEMENT_HEADER = "Notable Changes for Users"
 
 
 def main(release_body: str, upload_url: str, auth_token: str):
+    print(release_body)
     data = extract_user_announcements(release_body)
+    print(data)
 
     if data is not None:
         upload_asset(FILENAME, data, upload_url, auth_token)
