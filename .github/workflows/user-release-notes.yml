@@ -22,6 +22,11 @@ jobs:
           echo '${{ github.event.workflow_run.event.payload.release.body }}'
           echo '${{ github.event.payload.release.upload_url }}'
           echo '${{ github.event.payload.release.body }}'
+      - name: Try GitHub Action script
+        uses: actions/github-script@v8
+        with:
+          script: |
+            console.log(context);
       - run: pip install requests
       - name: Extract User Announcement Changes
         run: python .github/extract-user-announcement-changes.py ${{ github.event.payload.release.body }} '${{ github.event.payload.release.upload_url }}' '${{ github.token }}'
