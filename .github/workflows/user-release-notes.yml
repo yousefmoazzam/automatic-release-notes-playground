@@ -1,8 +1,10 @@
 name: Create User Announcement Release Notes
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: [Create Release with Changelog]
+    types:
+      - completed
 
 jobs:
   release:
