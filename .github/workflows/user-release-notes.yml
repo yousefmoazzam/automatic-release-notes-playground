@@ -18,9 +18,6 @@ jobs:
           python-version: '3.13'
       - run: |
           echo '${{ github.event_name }}'
-          echo '${{ context.payload.workflow_run }}'
-          echo '${{ context.payload.workflow_run.event }}'
-          echo '${{ context.payload.workflow_run.event.event_name }}'
           echo '${{ github.event.workflow_run.event.event_name }}'
           echo '${{ github.event.workflow_run.event.payload.release.body }}'
           echo '${{ github.event.payload.release.upload_url }}'
