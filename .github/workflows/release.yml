@@ -24,6 +24,7 @@ jobs:
         with:
           python-version: '3.13'
       - run: |
+          echo '${{ fromJSON(github.event) }}'
           echo '${{ github.event.payload.release }}'
           echo '${{ steps.release.outputs.upload_url }}'
       - run: pip install requests
