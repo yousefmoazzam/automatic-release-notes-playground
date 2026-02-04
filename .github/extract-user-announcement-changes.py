@@ -19,6 +19,7 @@ def main(upload_url: str, auth_token: str, tag: str):
 def get_release_body(tag: str) -> str:
     url = RELEASE_URL + tag
     resp = requests.get(url=url)
+    print(resp.json())
     return resp.json()["body"]
 
 
