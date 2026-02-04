@@ -25,7 +25,7 @@ jobs:
           python-version: '3.13'
       - run: pip install requests
       - name: Extract User Announcement Changes
-        run: python .github/extract-user-announcement-changes.py "${{ github.event.release.body }}" '${{ steps.release.outputs.upload_url }}' ${{ github.token }}
+        run: python .github/extract-user-announcement-changes.py '${{ github.event.release.body }}' '${{ steps.release.outputs.upload_url }}' '${{ github.token }}'
       - run: |
-          echo "${{ github.event.release.body }}"
+          echo '${{ github.event.release.body }}'
           echo '${{ steps.release.outputs.upload_url }}'
