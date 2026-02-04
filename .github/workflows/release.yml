@@ -27,5 +27,5 @@ jobs:
       - name: Extract User Announcement Changes
         run: python .github/extract-user-announcement-changes.py '${{ github.event.release.body }}' '${{ steps.release.outputs.upload_url }}' '${{ github.token }}'
       - run: |
-          echo '${{ github.event.release }}'
+          echo '${{ github.event }}'
           echo '${{ steps.release.outputs.upload_url }}'
