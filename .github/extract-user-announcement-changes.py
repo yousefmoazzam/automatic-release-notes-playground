@@ -4,23 +4,14 @@ import requests
 import sys
 
 FILENAME = "user-announcements.txt"
-RELEASE_URL = "https://api.github.com/repos/yousefmoazzam/automatic-release-notes-playground/releases/tags/"
 USER_ANNOUNCEMENT_HEADER = "Notable Changes for Users"
 
 
-def main(upload_url: str, auth_token: str, tag: str):
-    release_body = get_release_body(tag)
+def main(release_body: str, upload_url: str, auth_token: str):
     data = extract_user_announcements(release_body)
 
     if data is not None:
         upload_asset(FILENAME, data, upload_url, auth_token)
-
-
-def get_release_body(tag: str) -> str:
-    url = RELEASE_URL + tag
-    resp = requests.get(url=url)
-    print(resp.json())
-    return resp.json()["body"]
 
 
 def extract_user_announcements(text: str) -> Optional[str]:
@@ -60,7 +51,7 @@ if __name__ == "__main__":
 
     if len(args) != 3:
         print(
-            "Usage: python extract-user-announcement-changes.py <upload-url> <auth-token> <tag>"
+            "Usage: python extract-user-announcement-changes.py <release-body> <upload-url> <auth-token>"
         )
         sys.exit(1)
 
