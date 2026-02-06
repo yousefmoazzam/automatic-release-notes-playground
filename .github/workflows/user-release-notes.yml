@@ -27,6 +27,13 @@ jobs:
         with:
           script: |
             console.log(context);
+            console.log(context.payload.workflow_run.head_branch);
+            let release = await github.rest.actions.getAReleaseByTagName({
+              owner: "yousefmoazzam",
+              repo: "automatic-release-notes-playground",
+              tag: context.payload.workflow_run.head_branch
+            });
+            console.log(release.body);
       - run: pip install requests
       - name: Extract User Announcement Changes
         run: python .github/extract-user-announcement-changes.py ${{ github.event.payload.release.body }} '${{ github.event.payload.release.upload_url }}' '${{ github.token }}'
