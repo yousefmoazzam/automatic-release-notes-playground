@@ -30,7 +30,7 @@ jobs:
             
             function extractUserAnnouncements(text) {
               if (!text.includes(USER_ANNOUNCEMENT_HEADER)) {
-                return;
+                return [];
               }
 
               const lines = text.split("\n");
