@@ -22,10 +22,12 @@ jobs:
           echo '${{ github.event.workflow_run.event.payload.release.body }}'
           echo '${{ github.event.payload.release.upload_url }}'
           echo '${{ github.event.payload.release.body }}'
-      - name: Try GitHub Action script
+      - name: Extract User Announcement Changes
         uses: actions/github-script@v8
         with:
           script: |
+            const USER_ANNOUNCEMENT_HEADER = "Notable Changes for Users";
+            
             function extractUserAnnouncements(text) {
               if (!text.includes(USER_ANNOUNCEMENT_HEADER)) {
                 return;
@@ -66,6 +68,3 @@ jobs:
               name: "user-announcements.txt",
               data: encoder.encode(lines.join("\n")),
             });
-      - run: pip install requests
-      - name: Extract User Announcement Changes
-        run: python .github/extract-user-announcement-changes.py ${{ github.event.payload.release.body }} '${{ github.event.payload.release.upload_url }}' '${{ github.token }}'
