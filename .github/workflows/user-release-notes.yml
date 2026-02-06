@@ -28,7 +28,7 @@ jobs:
           script: |
             console.log(context);
             console.log(context.payload.workflow_run.head_branch);
-            let release = await github.rest.actions.getAReleaseByTagName({
+            let release = await github.rest.actions.getReleaseByTagName({
               owner: "yousefmoazzam",
               repo: "automatic-release-notes-playground",
               tag: context.payload.workflow_run.head_branch
