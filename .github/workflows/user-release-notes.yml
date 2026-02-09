@@ -47,11 +47,14 @@ jobs:
             });
 
             const lines = extractUserAnnouncements(release.data.body);
-            const encoder = new TextEncoder();
-            await github.rest.repos.uploadReleaseAsset({
-              owner: REPO_OWNER,
-              repo: REPO_NAME,
-              release_id: release.data.id,
-              name: FILENAME,
-              data: encoder.encode(lines.join("\n")),
-            });
+
+            if (lines.length > 0) {
+              const encoder = new TextEncoder();
+              await github.rest.repos.uploadReleaseAsset({
+                owner: REPO_OWNER,
+                repo: REPO_NAME,
+                release_id: release.data.id,
+                name: FILENAME,
+                data: encoder.encode(lines.join("\n")),
+              });
+            }
