@@ -10,22 +10,13 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v5
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-      - run: |
-          echo '${{ github.event_name }}'
-          echo '${{ github.event.workflow_run.event.event_name }}'
-          echo '${{ github.event.workflow_run.event.payload.release.body }}'
-          echo '${{ github.event.payload.release.upload_url }}'
-          echo '${{ github.event.payload.release.body }}'
       - name: Extract User Announcement Changes
         uses: actions/github-script@v8
         with:
           script: |
+            const REPO_OWNER = "yousefmoazzam";
+            const REPO_NAME = "automatic-release-notes-playground";
+            const FILENAME = "user-announcements.txt";
             const USER_ANNOUNCEMENT_HEADER = "Notable Changes for Users";
             
             function extractUserAnnouncements(text) {
@@ -49,22 +40,18 @@ jobs:
               return notes;
             };
 
-            console.log(context);
-            console.log(context.payload.workflow_run.head_branch);
             let release = await github.rest.repos.getReleaseByTag({
-              owner: "yousefmoazzam",
-              repo: "automatic-release-notes-playground",
+              owner: REPO_OWNER,
+              repo: REPO_NAME,
               tag: context.payload.workflow_run.head_branch
             });
-            console.log(release);
-            console.log(release.data.body);
 
             const lines = extractUserAnnouncements(release.data.body);
             const encoder = new TextEncoder();
             await github.rest.repos.uploadReleaseAsset({
-              owner: "yousefmoazzam",
-              repo: "automatic-release-notes-playground",
+              owner: REPO_OWNER,
+              repo: REPO_NAME,
               release_id: release.data.id,
-              name: "user-announcements.txt",
+              name: FILENAME,
               data: encoder.encode(lines.join("\n")),
             });
